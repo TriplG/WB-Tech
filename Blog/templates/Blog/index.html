@@ -1,0 +1,36 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+
+{% if head == "Все статьи" %}
+    <a href="{% url 'rec_article' %}">Рекомандации</a> |
+    <a href="{% url 'read_article' %}">Прочитанные статьи</a>
+{% elif head == "Ваши рекомендации" or head == 'Вы не подписались не на одну статью' %}
+    <a href="{% url 'read_article' %}">Прочитанные статьи</a> |
+    <a href="{% url 'all_articles' %}">Все статьи</a>
+{% elif head == "Прочитанные статьи" or head == 'Вы не прочитали не одной статьи' %}
+    <a href="{% url 'rec_article' %}">Рекомандации</a> |
+    <a href="{% url 'all_articles' %}">Все статьи</a>
+{% endif %}
+
+
+<h1>{{ head }}</h1>
+
+{% for contact in page_obj %}
+    <a href="{% url 'article_detail' contact.slug %}">{{ contact.title }}</a>
+    <h4>{{ contact.content }}</h4>
+    <hr>
+{% endfor %}
+
+
+<nav>
+    <ul>
+        {% for p in page_obj.paginator.page_range %}
+        <li>
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% endblock %}

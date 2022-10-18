@@ -1,0 +1,16 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'sort_list_user' %}" method="post">
+        {% csrf_token %}
+        <p>{{ sort_form }}
+    <input type="submit" name="sort" value="Сортировать"></p>
+    </form>
+
+{% for cau in count_article_user %}
+    <a href="{% url 'author_detail' cau.author.pk %}">{{ cau.author }}</a>
+    <h4>Статьи: {{ cau.count }}</h4>
+{% endfor %}
+
+{% endblock %}

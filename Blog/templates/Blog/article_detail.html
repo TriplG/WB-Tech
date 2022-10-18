@@ -1,0 +1,29 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+
+<h2>{{ article.title }}</h2>
+<h4>{{ article.content }}</h4>
+
+{% if request.user.is_authenticated %}
+
+    {% if marked_article is None %}
+        <a href="{% url 'sub_from_post' article.slug %}">Подписаться на пост</a>
+    {% elif marked_article.subscribe_to_post == True %}
+        <a href="{% url 'unsub_from_post' article.slug %}">Отписаться от поста</a>
+    {% endif %}
+    <br><br>
+    {% if read_the_article is None %}
+        <a href="{% url 'mark_as_read' article.slug %}">Пометить как прочитанное</a>
+    {% else %}
+        <a href="{% url 'remove_the_mark' article.slug %}">Снять пометку</a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}
+
+
+
+
+

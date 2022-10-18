@@ -1,0 +1,15 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+
+<h1>Посты пользователя - {{ user.username }}:</h1>
+
+{% for a in article %}
+<a href="{% url 'article_detail' a.slug %}">{{ a.title }}</a>
+<h2>{{ a.content }}</h2>
+
+
+{% endfor %}
+
+
+{% endblock %}
