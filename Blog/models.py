@@ -35,7 +35,6 @@ class MarkedArticle(models.Model):
 class CountArticleUser(models.Model):
     author = models.OneToOneField(User, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(verbose_name='Количество статей автора')
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
 
     def __str__(self):
         return f"Количество статей пользователя - {self.author}({self.count})"
@@ -49,3 +48,9 @@ class ReadTheArticle(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='Пост')
     showing_to_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Показывать для пользователя')
 
+    def __str__(self):
+        return f"Прочитанные статьи"
+
+    class Meta:
+        verbose_name = 'Количество прочитанных статей пользователя'
+        verbose_name_plural = 'Количество прочитанных статей пользоватей'

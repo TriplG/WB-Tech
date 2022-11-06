@@ -13,14 +13,14 @@ class SortAutorForm(forms.Form):
                                        )
 
 
-class SortHomeForm(forms.Form):
-    sort_home_form = forms.TypedChoiceField(label='Сортировать:',
-                                       choices=[
-                                           ('Все', 'Все статьи'),
-                                           ('Рекомендации', 'Рекомендации'),
-                                           ('Прочитанные', 'Прочитанные'),
-                                       ]
-                                       )
+# class SortHomeForm(forms.Form):
+#     sort_home_form = forms.TypedChoiceField(label='Сортировать:',
+#                                        choices=[
+#                                            ('Все', 'Все статьи'),
+#                                            ('Рекомендации', 'Рекомендации'),
+#                                            ('Прочитанные', 'Прочитанные'),
+#                                        ]
+#                                        )
 
 
 class AddArticleForm(forms.ModelForm):

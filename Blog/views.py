@@ -13,7 +13,6 @@ from transliterate import slugify
 from .models import *
 from .forms import *
 
-
 def index(request):
     if request.user.is_authenticated:
         return redirect(f'/rec_article/')
@@ -31,7 +30,6 @@ class AllArticles(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Главная страница'
-        context['sort_form'] = SortHomeForm()
         context['head'] = 'Все статьи'
 
         return context
@@ -87,7 +85,6 @@ class ReadArticle(View):
             head = 'Вы не прочитали не одной статьи'
             page_obj = None
 
-
         context = {
             'page_obj': page_obj,
             'title': 'Прочитанные статьи',
@@ -132,14 +129,14 @@ class SortListUser(View):
 class ShowArticleAuthor(DetailView):
     # Представление страницы пользователя с написанными им статьями
     model = User
-    template_name = 'blog/author_detail.html'
+    template_name = 'Blog/author_detail.html'
     context_object_name = 'user'
     pk_url_kwarg = 'user_id'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'Посты пользователя {self.request.user}'
-        context['article'] = Article.objects.filter(author=self.request.user).order_by('-time_create')
+        context['article'] = Article.objects.filter(author=kwargs['object']).order_by('-time_create')
 
         return context
 
@@ -147,7 +144,7 @@ class ShowArticleAuthor(DetailView):
 class ShowArticle(DetailView):
     # Представление для конкретной статьи
     model = Article
-    template_name = 'blog/article_detail.html'
+    template_name = 'Blog/article_detail.html'
     context_object_name = 'article'
     slug_url_kwarg = 'article_slug'
 
